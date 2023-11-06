@@ -1,0 +1,53 @@
+start -> BEGIN NEWLINE program END
+
+program -> def NEWLINE con
+        -> eps
+
+NEWLINE -> '\n'
+
+deff -> wyr deff
+     -> eps
+
+wyr -> ID ASSIGN func NEWLINE
+
+ASSIGN -> '='
+
+func -> VOLTAGESOURCE OBRAC args CBRAC
+     -> RESISTOR OBRAC args CBRAC
+     -> CAPACITOR OBRAC args CBRAC
+     -> INDUCTOR OBRAC args CBRAC
+     -> DIODE OBRAC args CBRAC
+     -> VOLTAGEPROBE OBRAC args CBRAC
+
+
+BRAC -> '['
+     -> ']'
+     -> '('
+     -> ')'
+
+
+args -> arg otherargs
+     -> eps
+
+otherargs -> COM args
+          -> eps
+
+COM -> ','
+
+arg -> ID ASSIGN NUMBER
+    -> NUMBER
+
+
+
+con -> skl con
+    -> eps
+
+skl -> czyn resztaczyn NEWLINE
+
+resztaczyn -> DDASH czyn resztaczyn
+           -> eps
+
+DDASH -> '--'
+
+czyn -> ID OSBRAC NUMBER CSBRAC
+     -> GND
